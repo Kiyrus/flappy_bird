@@ -1,8 +1,10 @@
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
+
 class Game {
     constructor(canvas) {
-        const canvas = document.getElementById("canvas");
         this.canvas = canvas;
-        this.ctx = canvas.getContext("2d");
+        this.context = context;
 
         this.background = new Background();
         this.foreground = new Foreground();
@@ -18,7 +20,13 @@ class Game {
 
     update() {}
 
-    draw() {}
+    draw() {
+        this.background.draw();
+        this.foreground.draw();
+        this.bird.draw();
+        this.pipes.forEach((pipe) => pipe.draw());
+        this.score.draw();
+    }
 
     run() {}
 
@@ -26,23 +34,54 @@ class Game {
 }
 
 class Background {
-    constructor(x, y, width, height, image) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    constructor(sX, sY, sWidth, sHeight, dX, dY, dWidth, dHeight, image) {
+        this.sX = sX;
+        this.sY = sY;
+        this.sWidth = sWidth;
+        this.sHeight = sHeight;
+        this.dX = dX;
+        this.dY = dY;
+        this.dWidth = dWidth;
+        this.dHeight = dHeight;
         this.image = image;
     }
 
-    draw() {}
+    draw() {
+        context.drawImage(
+            this.image,
+            this.sX,
+            this.sY,
+            this.sWidth,
+            this.sHeight,
+            this.dX,
+            this.dY,
+            this.dWidth,
+            this.dHeight,
+        );
+        context.drawImage(
+            this.image,
+            this.sX,
+            this.sY,
+            this.sWidth,
+            this.sHeight,
+            this.dX + this.dWidth,
+            this.dY,
+            this.dWidth,
+            this.dHeight,
+        );
+    }
 }
 
 class Foreground {
-    constructor(x, y, width, height, speed, image) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    constructor(sX, sY, sWidth, sHeight, dX, dY, dWidth, dHeight, speed, image) {
+        this.sX = sX;
+        this.sY = sY;
+        this.sWidth = sWidth;
+        this.sHeight = sHeight;
+        this.dX = dX;
+        this.dY = dY;
+        this.dWidth = dWidth;
+        this.dHeight = dHeight;
         this.speed = speed;
         this.image = image;
     }
@@ -53,11 +92,15 @@ class Foreground {
 }
 
 class Bird {
-    constructor() {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    constructor(sX, sY, sWidth, sHeight, dX, dY, dWidth, dHeight) {
+        this.sX = sX;
+        this.sY = sY;
+        this.sWidth = sWidth;
+        this.sHeight = sHeight;
+        this.dX = dX;
+        this.dY = dY;
+        this.dWidth = dWidth;
+        this.dHeight = dHeight;
         this.velocity = 0;
         this.gravity = 0;
         this.lift = 0;
@@ -120,9 +163,7 @@ class Sound {
         this.src = src;
     }
 
-    play() {
-    }
+    play() {}
 
-    stop() {
-    }
+    stop() {}
 }
