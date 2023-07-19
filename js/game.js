@@ -20,6 +20,8 @@ let pipeUpY = -250;
 let pipeDownX = 200;
 let pipeDownY = 250;
 
+let foregroundY = 340;
+
 let birdVelocity = 0;
 
 let gameOver = false;
@@ -88,9 +90,10 @@ function animationBird() {
         pipeDownX -= 2;
 
         if (
-            birdX + 34 >= pipeUpX &&
-            birdX <= pipeUpX + 53 &&
-            (birdY <= pipeUpY + 400 || birdY + 26 >= pipeDownY)
+            birdY >= foregroundY ||
+            (birdX + 34 >= pipeUpX &&
+                birdX <= pipeUpX + 53 &&
+                (birdY <= pipeUpY + 400 || birdY + 26 >= pipeDownY))
         ) {
             gameOver = true;
         }
