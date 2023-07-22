@@ -4,20 +4,36 @@ const context = canvas.getContext("2d");
 const sprite = new Image();
 sprite.src = "img/sprite.png";
 
+let volumeInput = document.getElementById("jcp-volume");
+
 const SCORE_S = new Audio();
 SCORE_S.src = "sfx/sfx_point.wav";
+SCORE_S.volume = volumeInput.value;
 
 const FLAP = new Audio();
 FLAP.src = "sfx/sfx_flap.wav";
+FLAP.volume = volumeInput.value;
 
 const HIT = new Audio();
 HIT.src = "sfx/sfx_hit.wav";
+HIT.volume = volumeInput.value;
 
 const SWOOSHING = new Audio();
 SWOOSHING.src = "sfx/sfx_swooshing.wav";
+SWOOSHING.volume = volumeInput.value;
 
 const CRASH = new Audio();
 CRASH.src = "sfx/sfx_crash.wav";
+CRASH.volume = volumeInput.value;
+
+volumeInput.addEventListener("change", function() {
+    let volumeCount = document.getElementById("jcp-volume").value;
+    SCORE_S.volume = volumeCount;
+    FLAP.volume = volumeCount;
+    HIT.volume = volumeCount;
+    SWOOSHING.volume = volumeCount;
+    CRASH.volume = volumeCount;
+});
 
 canvas.addEventListener("click", function (evt) {
     switch (gameCore.state.current) {
@@ -441,7 +457,6 @@ class Game {
         gameCore.update();
         gameCore.draw();
         gameCore.frames++;
-
         requestAnimationFrame(gameCore.loop);
     }
 }
