@@ -26,13 +26,12 @@ const CRASH = new Audio();
 CRASH.src = "sfx/sfx_crash.wav";
 CRASH.volume = volumeInput.value;
 
-volumeInput.addEventListener("change", function() {
-    let volumeCount = document.getElementById("jcp-volume").value;
-    SCORE_S.volume = volumeCount;
-    FLAP.volume = volumeCount;
-    HIT.volume = volumeCount;
-    SWOOSHING.volume = volumeCount;
-    CRASH.volume = volumeCount;
+volumeInput.addEventListener("change", function () {
+    SCORE_S.volume = volumeInput.value;
+    FLAP.volume = volumeInput.value;
+    HIT.volume = volumeInput.value;
+    SWOOSHING.volume = volumeInput.value;
+    CRASH.volume = volumeInput.value;
 });
 
 canvas.addEventListener("click", function (evt) {
