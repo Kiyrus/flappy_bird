@@ -451,12 +451,12 @@ class Game {
         foreGround.update();
         pipes.update();
     }
-    //loop (.this) lost context without "gameCore."
-    loop() {
-        gameCore.update();
-        gameCore.draw();
-        gameCore.frames++;
-        requestAnimationFrame(gameCore.loop);
+
+    loop = () => {
+        this.update();
+        this.draw();
+        this.frames++;
+        requestAnimationFrame(this.loop);
     }
 }
 
